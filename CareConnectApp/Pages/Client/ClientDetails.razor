@@ -1,0 +1,108 @@
+﻿@*@inherits DbContextPage*@
+@page "/Client/Details/{ClientId:int}"
+@using CareConnect.Core.Models;
+@using CareConnectApp.Data;
+@inject ClientManager clientManager
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name" @bind-value=@client.ClientDetail.FirstName>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" class="form-control" id="middleName" placeholder="Middle Name" @bind-value=@client.ClientDetail.MiddleName>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" @bind-value=@client.ClientDetail.LastName>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" @bind-value=@client.ClientDetail.PrimaryEmail>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="@client.ClientDetail.CellPhone" class="form-label" for="phone">Phone</label>
+                    <input asp-for="@client.ClientDetail.CellPhone" class="form-control" id="phone" type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="13" @bind-value=@client.ClientDetail.CellPhone>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="@client.ClientDetail.Dob" class="form-label" for="dob">Date of Birth</label>
+                    <input asp-for="@client.ClientDetail.Dob" class="form-control" id="dob" type="date" @bind-value=@client.ClientDetail.Dob>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <label asp-for="@client.Address.AddressLine1" class="form-label" for="address">Address</label>
+                <input asp-for="@client.Address.AddressLine1" class="form-control" id="address" type="text" @bind-value=@client.Address.AddressLine1>
+            </div>
+            <div class="col-md-4 form-group">
+                <label asp-for="@client.Address.City" class="form-label" for="city">City</label>
+                <input asp-for="@client.Address.City" class="form-control" id="city" type="text" @bind-value=@client.Address.City>
+            </div>
+            @* <div class="col-lg-2 form-group">
+                <label asp-for="client.EntityAddress.StateProvinceId" class="form-label" for="state">@Localizer["State"]</label>
+                <select asp-for="client.EntityAddress.StateProvinceId" class="form-control" asp-items="@Model.StatesList"></select>
+            </div>
+            <div class="col-lg-3 form-group">
+                <label asp-for="client.EntityAddress.CountryRegionId" class="form-label" for="country">@Localizer["Country"]</label>
+                <select asp-for="client.EntityAddress.CountryRegionId" class="form-control" asp-items="@Model.CountriesList"></select>
+            </div>*@
+            <div class="col-md-4 form-group">
+                <label asp-for="@client.Address.PostalCode" class="form-label" for="postal-code">Postal Code</label>
+                <input asp-for="@client.Address.PostalCode" class="form-control" id="postal-code" type="text" @bind-value=@client.Address.PostalCode>
+            </div>
+            <div class="col-md-4">
+           
+                <div class="form-check">
+  <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="M" checked >
+  <label class="form-check-label" for="exampleRadios1">
+    Male
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="F">
+  <label class="form-check-label" for="exampleRadios2">
+    Female
+  </label>
+</div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary" type="button" @onclick="@(args => Save())">Save</button>
+        </div>
+
+    </form>
+</div>
+@code {
+    [Parameter]
+    public int ClientId { get; set; }
+    private ClientWrapper client = new ClientWrapper();
+
+    protected override async Task OnInitializedAsync()
+    {
+        client.ClientDetail.Gender = "M";
+        if(ClientId>0)
+        {
+            client = await clientManager.GetClientById(ClientId);
+            
+        }
+        //    forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+   async void Save()
+    {
+        var result = await clientManager.saveClient(client);
+    }
+
+}
