@@ -1,0 +1,50 @@
+﻿@page "/Client"
+@using CareConnect.Core.Models;
+@using CareConnectApp.Data;
+@inject ClientManager clientManager
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">   <a class="btn btn-primary" href="/Client/Details/0">Add Client</a></div>
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Date of Birth</th>
+                       @* <th scope="col">City</th>
+                        <th scope="col">Pin</th>*@
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in clientList)
+                    {
+                        <tr>
+                            <th scope="row">@item.FirstName @item.LastName</th>
+                            <td>@item.CellPhone</td>
+                            <td>@item.PrimaryEmail</td>
+                            <td>@item.Dob</td>
+                           @* <td>@item.EntityAddress?.FirstOrDefault().City</td>
+                            <td>@item.EntityAddress?.FirstOrDefault().PostalCode</td>*@
+                            <td><a href="/Client/Details/@item.Id">Edit</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<CareConnect.Data.Models.Client> clientList = new List<CareConnect.Data.Models.Client>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        clientList = await clientManager.GetAll();
+
+        //    forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}

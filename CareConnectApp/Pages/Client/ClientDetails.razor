@@ -48,8 +48,8 @@
                 <input asp-for="@client.Address.AddressLine1" class="form-control" id="address" type="text" @bind-value=@client.Address.AddressLine1>
             </div>
             <div class="col-md-4 form-group">
-                <label asp-for="@client.Address.City" class="form-label" for="city">City</label>
-                <input asp-for="@client.Address.City" class="form-control" id="city" type="text" @bind-value=@client.Address.City>
+                <label asp-for="@client.Address?.City" class="form-label" for="city">City</label>
+                <input asp-for="@client.Address?.City" class="form-control" id="city" type="text" @bind-value=@client.Address.City>
             </div>
             @* <div class="col-lg-2 form-group">
                 <label asp-for="client.EntityAddress.StateProvinceId" class="form-label" for="state">@Localizer["State"]</label>

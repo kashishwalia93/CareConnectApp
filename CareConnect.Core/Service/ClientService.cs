@@ -31,6 +31,9 @@ namespace CareConnect.Core.Service
                                 Id = c.Id,
                                 CellPhone = c.CellPhone,
                                 LastName = c.LastName,
+                                EntityAddress=c.EntityAddress,
+                                PrimaryEmail=c.PrimaryEmail,
+                                Dob=c.Dob
                             }).ToListAsync();
                 }
             }
@@ -122,7 +125,7 @@ namespace CareConnect.Core.Service
                     if(client!=null)
                     {
                         clientData.ClientDetail = client;
-                        clientData.Address = client.EntityAddress.FirstOrDefault();
+                        clientData.Address = client.EntityAddress.Any()? client.EntityAddress.FirstOrDefault():new EntityAddress();
                     }
 
                 }

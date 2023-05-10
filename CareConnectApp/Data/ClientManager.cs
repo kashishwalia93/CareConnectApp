@@ -1,6 +1,7 @@
 ﻿using CareConnect.Core.IService;
 using CareConnect.Core.Models;
 using CareConnect.Core.Service;
+using CareConnect.Data.Models;
 
 namespace CareConnectApp.Data
 {
@@ -19,6 +20,11 @@ namespace CareConnectApp.Data
         public async Task<ClientWrapper> GetClientById(int Id)
         {
             return await _clientService.GetClientById(Id);
+
+        }
+        public async Task<List<Client>> GetAll()
+        {
+            return await _clientService.GetClients();
 
         }
     }

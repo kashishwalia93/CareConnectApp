@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareConnectApp", "CareConne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareConnect.Data", "CareConnect.Data\CareConnect.Data.csproj", "{DC183A22-8D80-48DC-992F-C3A97C537730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareConnect.Core", "CareConnect.Core\CareConnect.Core.csproj", "{867447A3-870D-41E9-BCA2-1EED2DB06880}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareConnect.Core", "CareConnect.Core\CareConnect.Core.csproj", "{867447A3-870D-41E9-BCA2-1EED2DB06880}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
